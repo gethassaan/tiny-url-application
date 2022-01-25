@@ -1,20 +1,27 @@
 import { nanoid } from "nanoid";
-import { ShortUrlBase, ShortUrlEntity } from "../entity/database.entity";
+import { ShortUrlEntity, ShortUrlInput, ShortUrlOutput } from "../entity/database.entity";
 
 export const database = (() => {
-  let _database : ShortUrlEntity = {
-  };
+  let _database : ShortUrlEntity = {};
 
-  function createShortUrl(input: ShortUrlBase) {
-    const generatedShortUrl = nanoid();
-    _database = Object.keys(_database).length > 0 ? { ..._database, generatedShortUrl: { ...input } } : { generatedShortUrl: { ...input } };
-    return generatedShortUrl;
+  function createShortUrl(input: ShortUrlInput): ShortUrlOutput {
+    const generatedShortUrl: string = nanoid(7);
+    const updatedInput: ShortUrlEntity = {
+      [generatedShortUrl]: {
+        actualUrl: input.actualUrl,
+        shortUrl: generatedShortUrl,
+        createdAt: new Date().toISOString()
+      }
+    }
+    _database = Object.keys(_database).length > 0 ? { ..._database, ...updatedInput } : { ...updatedInput };
+    return {url: generatedShortUrl};
   }
 
-  function getShortUrl<Key extends keyof ShortUrlEntity>(id: Key): Promise<ShortUrlEntity[Key]> {
+  function getShortUrl<Key extends string>(id: Key): Promise<ShortUrlOutput> {
     return new Promise((res, rej) => {
       setTimeout(() => {
-        _database[id] ? res(_database[id]) : rej(new Error("not_found"));
+        // @ts-ignore
+        _database[id] ? res({url: _database[id].actualUrl}) : rej(new Error("not_found"));
       }, 300);
     })};
   return { getShortUrl, createShortUrl };

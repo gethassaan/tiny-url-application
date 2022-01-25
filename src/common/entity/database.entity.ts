@@ -5,5 +5,13 @@ export interface ShortUrlEntity {
 export type ShortUrlBase = {
     actualUrl: string;
     shortUrl: string;
-    createdAt: Date;
+    createdAt: string;
+}
+
+export type ShortUrlInput = {
+    actualUrl: string;
+}
+
+export type ShortUrlOutput = {
+    url: string;
 }
