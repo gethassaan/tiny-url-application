@@ -11,6 +11,7 @@ import hpp from "hpp";
 import { RateLimiterMiddleware } from "../../core/middlewares/rate-limiter.middleware";
 import { ERROR_MESSAGES } from "../constnats/common.constants";
 import { RETURN_BAD_REQUEST_RESPONSE } from "../utilities/common.utilities";
+import 'dotenv/config';
 
 export default class ServerConfiguration {
   constructor() {}
@@ -41,12 +42,12 @@ export default class ServerConfiguration {
    /**
     * Middleware: Use to limit repeated requests to public APIs and/or endpoints.
     */
-    RateLimiterMiddleware.init(app, 200, (15 * 60 * 1000)), // these variables will be moved to the enviornment file
+    RateLimiterMiddleware.init(app), // these variables will be moved to the enviornment file
 
    /**
     * Middleware: protect against cross-origin HTTP requests.
     */
-    CorsMiddleware.init(app, "http://localhost:3000"); // these variables will be moved to the enviornment file
+    CorsMiddleware.init(app); // these variables will be moved to the enviornment file
 
     app.use("/", indexRouter);
     // catch 404 and forward to error handler

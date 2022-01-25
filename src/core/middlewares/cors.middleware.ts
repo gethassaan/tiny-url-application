@@ -3,11 +3,10 @@ import cors from 'cors';
 export class CorsMiddleware {
   public static init(
     app: any,
-    origins?: string,
   ) {
     const corsOptions = {
       optionsSuccessStatus: 200,
-      origins,
+      origin: process.env.CORS_ORIGIN || '',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
       exposedHeaders: [
