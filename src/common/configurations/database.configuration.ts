@@ -4,7 +4,7 @@ import { ShortUrlEntity, ShortUrlInput, ShortUrlOutput } from "../entity/databas
 export const database = (() => {
   let _database : ShortUrlEntity = {};
 
-  function createShortUrl(input: ShortUrlInput): ShortUrlOutput {
+  function createShortUrl(input: ShortUrlInput): Promise<ShortUrlOutput> {
     const generatedShortUrl: string = nanoid(7);
     const updatedInput: ShortUrlEntity = {
       [generatedShortUrl]: {
@@ -13,8 +13,13 @@ export const database = (() => {
         createdAt: new Date().toISOString()
       }
     }
-    _database = Object.keys(_database).length > 0 ? { ..._database, ...updatedInput } : { ...updatedInput };
-    return {url: generatedShortUrl};
+   return new Promise<ShortUrlOutput>((resolve) => {
+     _database = Object.keys(_database).length > 0 ? { ..._database, ...updatedInput } : { ...updatedInput };
+     setTimeout(() => {
+       resolve({url: generatedShortUrl})
+     }, 300);
+
+   })
   }
 
   function getShortUrl<Key extends string>(id: Key): Promise<ShortUrlOutput> {

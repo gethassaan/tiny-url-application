@@ -16,9 +16,9 @@ router.get('/get-short-url/:url', async function (req: express.Request, res: exp
 });
 
 router.post('/create-short-url', async function (req: express.Request, res: express.Response, next: express.NextFunction) {
-  const { url: receivedUrl } = req.body;
+  const { url: actualUrl } = req.body;
   console.log("in create short url router"); // this log will be replaced by logger function
-  const createShortUrl = await database.createShortUrl({ actualUrl: receivedUrl });
+  const createShortUrl = await database.createShortUrl({ actualUrl });
   console.log('========== createShortUrl ========= ',createShortUrl);
   res.status(200).send(createShortUrl);
 });
