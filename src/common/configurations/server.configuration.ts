@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import * as express from "express";
 import logger from "morgan";
 import createError from "http-errors";
-import indexRouter from "../../app/routes/index.routes";
+import indexRouter from "../../app/index/index.routes";
 import http from "http";
 import { CorsMiddleware } from "../../core/middlewares/cors.middleware";
 import helmet from "helmet";
