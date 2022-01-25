@@ -10,6 +10,7 @@ import compression from "compression";
 import hpp from "hpp";
 import { RateLimiterMiddleware } from "../../core/middlewares/rate-limiter.middleware";
 import { ERROR_MESSAGES } from "../constnats/common.constants";
+import { RETURN_BAD_REQUEST_RESPONSE } from "../utilities/common.utilities";
 
 export default class ServerConfiguration {
   constructor() {}
@@ -56,7 +57,7 @@ export default class ServerConfiguration {
     // error handler
     app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
       logger("error", err);
-      res?.status(err.status || 500).send({error: ERROR_MESSAGES.ROUTE_NOT_FOUND});
+      RETURN_BAD_REQUEST_RESPONSE(res, ERROR_MESSAGES.ROUTE_NOT_FOUND, err.status || 500);
       next();
     });
     /**
