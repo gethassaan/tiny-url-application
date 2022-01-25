@@ -2,13 +2,14 @@ import cookieParser from "cookie-parser";
 import * as express from "express";
 import logger from "morgan";
 import createError from "http-errors";
-import indexRouter from "../../app/routes/index";
+import indexRouter from "../../app/routes/index.routes";
 import http from "http";
 import { CorsMiddleware } from "../../core/middlewares/cors.middleware";
 import helmet from "helmet";
 import compression from "compression";
 import hpp from "hpp";
 import { RateLimiterMiddleware } from "../../core/middlewares/rate-limiter.middleware";
+import { ERROR_MESSAGES } from "../constnats/common.constants";
 
 export default class ServerConfiguration {
   constructor() {}
@@ -55,7 +56,7 @@ export default class ServerConfiguration {
     // error handler
     app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
       logger("error", err);
-      res?.status(err.status || 500).send("hahahaha error");
+      res?.status(err.status || 500).send({error: ERROR_MESSAGES.ROUTE_NOT_FOUND});
       next();
     });
     /**
