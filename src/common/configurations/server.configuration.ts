@@ -9,7 +9,7 @@ import helmet from "helmet";
 import compression from "compression";
 import hpp from "hpp";
 import { RateLimiterMiddleware } from "../../core/middlewares/rate-limiter.middleware";
-import { ERROR_MESSAGES } from "../constnats/common.constants";
+import { ERROR_MESSAGES, STATUS_CODES } from "../constnats/common.constants";
 import { RETURN_BAD_REQUEST_RESPONSE } from "../utilities/common.utilities";
 import 'dotenv/config';
 
@@ -58,7 +58,7 @@ export default class ServerConfiguration {
     // error handler
     app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
       logger("error", err);
-      RETURN_BAD_REQUEST_RESPONSE(res, ERROR_MESSAGES.ROUTE_NOT_FOUND, err.status || 500);
+      RETURN_BAD_REQUEST_RESPONSE(res, ERROR_MESSAGES.ROUTE_NOT_FOUND, err.status || STATUS_CODES.INTERNAL_SERVER_ERROR_CODE);
       next();
     });
     /**

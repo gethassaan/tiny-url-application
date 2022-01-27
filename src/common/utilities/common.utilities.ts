@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { STATUS_CODES } from '../constnats/common.constants';
 
 export const URL_PATTERN = () => {
   return new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -9,10 +10,10 @@ export const URL_PATTERN = () => {
     '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
 };
 
-export const RETURN_BAD_REQUEST_RESPONSE = (res: Response, message: string, response_status: number = 400) => {
+export const RETURN_BAD_REQUEST_RESPONSE = (res: Response, message: string, response_status: number = STATUS_CODES.BAD_REQUEST_CODE) => {
     return res.status(response_status).send({error: message});
 }
 
-export const RETURN_SUCCESS_REQUEST_RESPONSE = (res: Response, message: any, response_status: number = 200) => {
+export const RETURN_SUCCESS_REQUEST_RESPONSE = (res: Response, message: any, response_status: number = STATUS_CODES.SUCCESS_REQUEST_CODE) => {
     return res.status(response_status).send(message);
 }
