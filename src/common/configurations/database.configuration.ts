@@ -29,5 +29,13 @@ export const database = (() => {
         _database[id] ? res({url: _database[id].actualUrl}) : rej(new Error("not_found"));
       }, 300);
     })};
-  return { getShortUrl, createShortUrl };
+
+  function clearDatabase(): Promise<Object> {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        // @ts-ignore
+        _database = Object.assign({});
+      }, 300);
+    })};
+  return { getShortUrl, createShortUrl, clearDatabase };
 })();

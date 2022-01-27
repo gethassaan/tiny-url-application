@@ -11,6 +11,7 @@ This project was built using Node version v16.2 and npm version 7.23. This appli
 - To start the project run “npm run start” it will start the project.
   - To test the create-short-url API, make a POST call to the “/” (at port you have provided in .env file) and in JSON body provide “url” parameter with a correct URL as an input value otherwise it will throw an exception.
   - To test the get-short-url API, make a GET call to the “/” (at port you have provided in .env file) with providing url that was previously returned from “create-short-url API”  and you will receive the url that you provided in input if wrong url provided it will throw an exception.
+- To see the test coverage run “npm run test”.
 - To run tests run “npm run test:watch”.
 - To build the project use “npm run build”.
 - To clean the build files from dist folder run “npm run clean”.
