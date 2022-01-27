@@ -5,12 +5,12 @@ import { IndexService } from './index.service';
 var router = express.Router();
 
 /* GET home page. */
-router.get('/get-short-url/:url', ValidateUrlRequest, async function (req: express.Request, res: express.Response) {
+router.get('/:url', ValidateUrlRequest, async function (req: express.Request, res: express.Response) {
   console.log("in get short url router"); // this log will be replaced by logger function
   return await IndexService.getShortUrl(req, res);
 });
 
-router.post('/create-short-url', ValidateUrlBody, async function (req: express.Request, res: express.Response) {
+router.post('/', ValidateUrlBody, async function (req: express.Request, res: express.Response) {
   console.log("in create short url router"); // this log will be replaced by logger function
   return await IndexService.createShortUrl(req, res);
 });

@@ -16,7 +16,7 @@ export const database = (() => {
    return new Promise<ShortUrlOutput>((resolve) => {
      _database = Object.keys(_database).length > 0 ? { ..._database, ...updatedInput } : { ...updatedInput };
      setTimeout(() => {
-       resolve({url: generatedShortUrl})
+       resolve({ url: `${process.env.DOMAIN_NAME}/` + generatedShortUrl });
      }, 300);
 
    })
