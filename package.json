@@ -6,7 +6,9 @@
     "start": "ts-node app.ts",
     "dev": "nodemon app.ts",
     "test": "jest --coverage",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "tsc --build --clean"
   },
   "dependencies": {
     "compression": "^1.7.4",
