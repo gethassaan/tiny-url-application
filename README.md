@@ -1,46 +1,16 @@
-### Objective
+**Summary:**
 
-Your assignment is to implement a URL shortening service using Node and any framework.
+This project was built using Node version v16.2 and npm version 7.23. This application is a short creating app which exposes two API's. One is a Post request (create-short-url API) and the other one is Get (get-short-url API). Post request is used to save the actual URL and generate a short URL. Get is used to retrieve that short URL back that you have saved earlier. Both endpoints are at index ‘/’.
 
-### Brief
+**Guide to project:**
 
-ShortLink is a URL shortening service where you enter a URL such as https://codesubmit.io/library/react and it returns a short URL such as http://short.est/GeAi9K.
 
-### Tasks
-
-- Implement assignment using:
-  - Language: **Node**
-  - Framework: **any framework**
-  - Two endpoints are required
-    - /encode - Encodes a URL to a shortened URL
-    - /decode - Decodes a shortened URL to its original URL.
-  - Both endpoints should return JSON
-- There is no restriction on how your encode/decode algorithm should work. You just need to make sure that a URL can be encoded to a short URL and the short URL can be decoded to the original URL. **You do not need to persist short URLs to a database. Keep them in memory.**
-- Provide detailed instructions on how to run your assignment in a separate markdown file
-- Provide API tests for both endpoints
-
-### Evaluation Criteria
-
-- **Node** best practices (**TypeScript** is always a plus)
-- Show us your work through your commit history
-- Completeness: did you complete the features?
-- Correctness: does the functionality act in sensible, thought-out ways including proper loading and error state handling?
-- Maintainability: is it written in a clean, maintainable way?
-  - Dependency management & packaging
-  - Project structure
-  - Readability
-  - Code complexity
-  - Modern stack
-- Performance
-- Testing: is the system adequately tested?
-  - Unit testing
-  - Integration testing
-  - E2E
-
-### CodeSubmit
-
-Please organize, design, test and document your code as if it were going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
-
-All the best and happy coding,
-
-The finn GmbH Team
+- Clone the project.
+- Copy .env.example file and rename it to .env (make sure the values are set for variables or provide your own).
+- Install all the dependencies by running “npm install”.
+- To start the project run “npm run start” it will start the project.
+  - To test the create-short-url API, make a POST call to the “/” (at port you have provided in .env file) and in JSON body provide “url” parameter with a correct URL as an input value otherwise it will throw an exception.
+  - To test the get-short-url API, make a GET call to the “/” (at port you have provided in .env file) with providing url that was previously returned from “create-short-url API”  and you will receive the url that you provided in input if wrong url provided it will throw an exception.
+- To run tests run “npm run test:watch”.
+- To build the project use “npm run build”.
+- To clean the build files from dist folder run “npm run clean”.
